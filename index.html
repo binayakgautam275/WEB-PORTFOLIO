@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Stack Developer ePortfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-light: #ecf0f1;
+            --bg-dark: #34495e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(44, 62, 80, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: var(--text-light) !important;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color) !important;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--bg-dark));
+            color: var(--text-light);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .demo-box {
+            background: #f8f9fa;
+            border: 2px dashed var(--secondary-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .demo-result {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .code-snippet {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        .css-demo {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .bootstrap-demo .btn {
+            margin: 5px;
+        }
+
+        .js-interactive {
+            background: #fff;
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin: 10px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .counter {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="https://instagram.fbhr4-1.fna.fbcdn.net/v/t51.2885-19/535003906_17988169595831921_2726871430827037312_n.jpg?efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmV4cGVyaW1lbnRhbCJ9&_nc_ht=instagram.fbhr4-1.fna.fbcdn.net&_nc_cat=105&_nc_oc=Q6cZ2QFn_1NVstvjJekOWhaJctxJQFch3Mg7xjbEo1kq9b0JFyky5itl03ZDeKmFVZm2P9Y&_nc_ohc=7nMaS3_Czl0Q7kNvwEmzNIR&_nc_gid=SD85-ilVhGEVCzp5gmm2vQ&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AfXzyVh41av6U6oBhrIy2NK78U-H-WuWKOC803dRTP0A6w&oe=68B637AD&_nc_sid=7d3ac5"style="width:50px; border-radius: 100px;">  Binayak Gautam</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#fullstack">Full Stack</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#html">HTML</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#css">CSS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#bootstrap">Bootstrap</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#javascript">JavaScript</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <h1 class="display-3 mb-4 animate-in">Full Stack Developer</h1>
+            <p class="lead mb-4 animate-in">Showcasing modern web development skills and technologies</p>
+            <div class="row justify-content-center">
+                <div class="col-md-2 col-sm-4 col-6"><i class="fab fa-html5 tech-icon"></i></div>
+                <div class="col-md-2 col-sm-4 col-6"><i class="fab fa-css3-alt tech-icon"></i></div>
+                <div class="col-md-2 col-sm-4 col-6"><i class="fab fa-bootstrap tech-icon"></i></div>
+                <div class="col-md-2 col-sm-4 col-6"><i class="fab fa-js-square tech-icon"></i></div>
+                <div class="col-md-2 col-sm-4 col-6"><i class="fas fa-database tech-icon"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container my-5">
+        <!-- Section 1: What is Full Stack Development? -->
+        <div id="fullstack" class="section-card animate-in">
+            <h2 class="section-title"><i class="fas fa-layer-group"></i> What is Full Stack Development?</h2>
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <p class="lead">Full stack development refers to the practice of working with both front-end and back-end technologies to create complete web applications.</p>
+                    
+                    <h4>Key Components:</h4>
+                    <ul class="list-group list-group-flush mb-4">
+                        <li class="list-group-item"><strong>Frontend:</strong> User interface and user experience (HTML, CSS, JavaScript)</li>
+                        <li class="list-group-item"><strong>Backend:</strong> Server-side logic, databases, and APIs</li>
+                        <li class="list-group-item"><strong>Database:</strong> Data storage and management</li>
+                        <li class="list-group-item"><strong>Version Control:</strong> Git and collaborative development</li>
+                        <li class="list-group-item"><strong>Deployment:</strong> Hosting and production environments</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <div class="demo-box">
+                        <h5>My Tech Stack</h5>
+                        <div class="skill-badge">HTML5</div>
+                        <div class="skill-badge">CSS3</div>
+                        <div class="skill-badge">JavaScript</div>
+                        <div class="skill-badge">Bootstrap</div>
+                        <div class="skill-badge">Node.js</div>
+                        <div class="skill-badge">MongoDB</div>
+                        <div class="skill-badge">Git</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-box">
+                <h5>Full Stack Architecture Visualization</h5>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="bg-primary text-white p-3 rounded mb-2">
+                            <i class="fas fa-desktop fa-2x mb-2"></i>
+                            <h6>Frontend</h6>
+                            <small>User Interface Layer</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-success text-white p-3 rounded mb-2">
+                            <i class="fas fa-server fa-2x mb-2"></i>
+                            <h6>Backend</h6>
+                            <small>Server Logic Layer</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-warning text-white p-3 rounded mb-2">
+                            <i class="fas fa-database fa-2x mb-2"></i>
+                            <h6>Database</h6>
+                            <small>Data Storage Layer</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: HTML -->
+        <div id="html" class="section-card animate-in">
+            <h2 class="section-title"><i class="fab fa-html5"></i> HTML - HyperText Markup Language</h2>
+            
+            <p class="lead">HTML is the foundation of web development, providing the structure and content of web pages through semantic markup.</p>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>Code Example:</h4>
+                    <div class="code-snippet">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My Portfolio&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+    &lt;main&gt;
+        &lt;section id="about"&gt;
+            &lt;h1&gt;Welcome to My Portfolio&lt;/h1&gt;
+            &lt;p&gt;I'm a full stack developer&lt;/p&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h4>Key HTML5 Features I Use:</h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fas fa-check text-success"></i> Semantic elements (header, nav, main, section)</li>
+                        <li class="list-group-item"><i class="fas fa-check text-success"></i> Form validation attributes</li>
+                        <li class="list-group-item"><i class="fas fa-check text-success"></i> Multimedia elements (audio, video)</li>
+                        <li class="list-group-item"><i class="fas fa-check text-success"></i> Accessibility features (ARIA labels)</li>
+                        <li class="list-group-item"><i class="fas fa-check text-success"></i> Progressive enhancement</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="demo-box">
+                <h5>Live HTML Demo - Semantic Structure</h5>
+                <div class="demo-result">
+                    <article>
+                        <header>
+                            <h3>Sample Article</h3>
+                            <time datetime="2024-01-01">January 1, 2024</time>
+                        </header>
+                        <p>This demonstrates proper HTML5 semantic structure with article, header, and time elements.</p>
+                        <footer>
+                            <small>Author: Full Stack Developer</small>
+                        </footer>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: CSS -->
+        <div id="css" class="section-card animate-in">
+            <h2 class="section-title"><i class="fab fa-css3-alt"></i> CSS - Cascading Style Sheets</h2>
+            
+            <p class="lead">CSS brings life to HTML through styling, animations, and responsive design principles.</p>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>Advanced CSS Techniques:</h4>
+                    <div class="code-snippet">
+/* Flexbox Layout */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* CSS Grid */
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Custom Properties & Animations */
+:root {
+    --primary-color: #3498db;
+    --transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    transition: var(--transition);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h4>CSS Skills Demonstrated:</h4>
+                    <ul class="list-group list-group-flush mb-3">
+                        <li class="list-group-item">Flexbox and Grid layouts</li>
+                        <li class="list-group-item">CSS Custom Properties (Variables)</li>
+                        <li class="list-group-item">Animations and Transitions</li>
+                        <li class="list-group-item">Responsive Design</li>
+                        <li class="list-group-item">Modern selectors and pseudo-classes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="demo-box">
+                <h5>Live CSS Demo - Hover Effects & Animations</h5>
+                <div class="css-demo" style="transition: all 0.3s ease; cursor: pointer;" 
+                     onmouseover="this.style.transform='scale(1.05) rotate(2deg)'" 
+                     onmouseout="this.style.transform='scale(1) rotate(0deg)'">
+                    Hover over me to see CSS animations in action!
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Bootstrap Framework -->
+        <div id="bootstrap" class="section-card animate-in">
+            <h2 class="section-title"><i class="fab fa-bootstrap"></i> Bootstrap Framework</h2>
+            
+            <p class="lead">Bootstrap enables rapid development of responsive, mobile-first websites with its comprehensive component library and grid system.</p>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>Bootstrap Features I Use:</h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fas fa-mobile-alt text-primary"></i> Responsive Grid System</li>
+                        <li class="list-group-item"><i class="fas fa-puzzle-piece text-primary"></i> Pre-built Components</li>
+                        <li class="list-group-item"><i class="fas fa-paint-brush text-primary"></i> Utility Classes</li>
+                        <li class="list-group-item"><i class="fas fa-cogs text-primary"></i> JavaScript Plugins</li>
+                        <li class="list-group-item"><i class="fas fa-palette text-primary"></i> Theme Customization</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <div class="code-snippet">
+&lt;!-- Bootstrap Grid Example --&gt;
+&lt;div class="container"&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col-md-8"&gt;Main Content&lt;/div&gt;
+        &lt;div class="col-md-4"&gt;Sidebar&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Bootstrap Components --&gt;
+&lt;button class="btn btn-primary btn-lg"&gt;
+    Primary Button
+&lt;/button&gt;
+
+&lt;div class="card"&gt;
+    &lt;div class="card-body"&gt;
+        &lt;h5 class="card-title"&gt;Card Title&lt;/h5&gt;
+        &lt;p class="card-text"&gt;Card content&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-box">
+                <h5>Bootstrap Components Demo</h5>
+                <div class="bootstrap-demo">
+                    <button class="btn btn-primary">Primary</button>
+                    <button class="btn btn-success">Success</button>
+                    <button class="btn btn-warning">Warning</button>
+                    <button class="btn btn-danger">Danger</button>
+                    
+                    <div class="alert alert-info mt-3" role="alert">
+                        <i class="fas fa-info-circle"></i> This is a Bootstrap alert component!
+                    </div>
+                    
+                    <div class="progress mt-3">
+                        <div class="progress-bar bg-success" style="width: 75%">75% Complete</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: JavaScript -->
+        <div id="javascript" class="section-card animate-in">
+            <h2 class="section-title"><i class="fab fa-js-square"></i> JavaScript - Dynamic Interactivity</h2>
+            
+            <p class="lead">JavaScript adds interactivity and dynamic behavior to web applications, from simple DOM manipulation to complex single-page applications.</p>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>JavaScript Concepts I Master:</h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ES6+ Features (Arrow functions, Classes, Modules)</li>
+                        <li class="list-group-item">DOM Manipulation & Event Handling</li>
+                        <li class="list-group-item">Asynchronous Programming (Promises, Async/Await)</li>
+                        <li class="list-group-item">API Integration & Fetch</li>
+                        <li class="list-group-item">Local Storage & Session Management</li>
+                        <li class="list-group-item">Form Validation & User Input</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <div class="code-snippet">
+// Modern JavaScript Example
+class TaskManager {
+    constructor() {
+        this.tasks = [];
+        this.init();
+    }
+
+    init() {
+        document.getElementById('addTask')
+            .addEventListener('click', (e) => {
+                this.addTask(e.target.value);
+            });
+    }
+
+    addTask(taskText) {
+        const task = {
+            id: Date.now(),
+            text: taskText,
+            completed: false
+        };
+        
+        this.tasks.push(task);
+        this.render();
+    }
+
+    async fetchTasks() {
+        try {
+            const response = await fetch('/api/tasks');
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+}
+
+// Initialize app
+const taskApp = new TaskManager();
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-box">
+                <h5>Interactive JavaScript Demo</h5>
+                <div class="js-interactive">
+                    <div class="mb-3">
+                        <label class="form-label">Enter your name:</label>
+                        <input type="text" id="nameInput" class="form-control" placeholder="Your name here...">
+                        <button class="btn btn-primary mt-2" onclick="greetUser()">Greet Me!</button>
+                    </div>
+                    
+                    <div id="greeting" class="alert alert-success" style="display: none;"></div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Click Counter:</label>
+                        <br>
+                        <button class="btn btn-info" onclick="incrementCounter()">Click Me!</button>
+                        <span class="counter ms-3" id="clickCount">0</span>
+                    </div>
+                    
+                    <div>
+                        <label class="form-label">Random Quote Generator:</label>
+                        <br>
+                        <button class="btn btn-secondary" onclick="generateQuote()">Get Quote</button>
+                        <blockquote class="blockquote mt-2" id="quote" style="display: none;"></blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center py-4">
+            <div class="section-card">
+                <h4>Thank you for reviewing my ePortfolio!</h4>
+                <p class="mb-3">This portfolio demonstrates my understanding of full stack development concepts and practical implementation skills.</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-3 col-6">
+                        <div class="text-center">
+                            <i class="fab fa-html5 tech-icon"></i>
+                            <h6>HTML5</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="text-center">
+                            <i class="fab fa-css3-alt tech-icon"></i>
+                            <h6>CSS3</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="text-center">
+                            <i class="fab fa-bootstrap tech-icon"></i>
+                            <h6>Bootstrap</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="text-center">
+                            <i class="fab fa-js-square tech-icon"></i>
+                            <h6>JavaScript</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // JavaScript functionality for interactive demos
+        let clickCount = 0;
+        
+        const quotes = [
+            "The only way to do great work is to love what you do. - Steve Jobs",
+            "Code is poetry. - WordPress",
+            "First, solve the problem. Then, write the code. - John Johnson",
+            "Experience is the name everyone gives to their mistakes. - Oscar Wilde",
+            "In order to be irreplaceable, one must always be different. - Coco Chanel"
+        ];
+
+        function greetUser() {
+            const name = document.getElementById('nameInput').value;
+            const greeting = document.getElementById('greeting');
+            
+            if (name.trim()) {
+                greeting.innerHTML = `<i class="fas fa-hand-wave"></i> Hello, ${name}! Welcome to my portfolio!`;
+                greeting.style.display = 'block';
+                
+                // Add animation
+                greeting.style.opacity = '0';
+                setTimeout(() => {
+                    greeting.style.transition = 'opacity 0.5s ease';
+                    greeting.style.opacity = '1';
+                }, 100);
+            } else {
+                alert('Please enter your name first!');
+            }
+        }
+
+        function incrementCounter() {
+            clickCount++;
+            const counter = document.getElementById('clickCount');
+            counter.textContent = clickCount;
+            
+            // Add bounce animation
+            counter.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                counter.style.transform = 'scale(1)';
+                counter.style.transition = 'transform 0.2s ease';
+            }, 200);
+        }
+
+        function generateQuote() {
+            const quoteElement = document.getElementById('quote');
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            
+            quoteElement.innerHTML = `<p class="mb-0"><em>"${randomQuote}"</em></p>`;
+            quoteElement.style.display = 'block';
+            
+            // Add fade-in animation
+            quoteElement.style.opacity = '0';
+            setTimeout(() => {
+                quoteElement.style.transition = 'opacity 0.5s ease';
+                quoteElement.style.opacity = '1';
+            }, 100);
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize tooltips if Bootstrap is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add some dynamic copyright year
+            const currentYear = new Date().getFullYear();
+            console.log(`Portfolio loaded successfully in ${currentYear}`);
+        });
+    </script>
+</body>
+</html>
